@@ -1,0 +1,17 @@
+<html>
+    <body>
+		<H1>Welcome to Bookshelf</H1>
+	      <hr>
+        <H2>Book Details:</H2>
+        <p>Book Name: <%= booking.book %></i></p>
+        <p>Book ID: <%= booking.id %></p>
+
+        <% if (booking.userid) { %>
+            <p><small>Created by User ID: <%= booking.userid %></small></p>
+        <% } %>
+        <br>
+        <a href="/edit?_id=<%= booking._id %>">Edit</a><br>
+        <a href="/delete?_id=<%= booking._id %>">Remove book</a><br>
+        <a href="/">Back to bookshelf</a>
+    </body>
+</html>

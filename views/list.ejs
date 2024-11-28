@@ -1,0 +1,14 @@
+<html>
+    <body>
+        <H1>Welcome to Bookshelf</H1>
+		<hr/>
+        <H2>Book List(<%= nBookings %>)</H2>
+        <ul>
+            <% for (var b of bookings) { %>
+            <li>Book Name: <a href="/details?_id=<%= b._id %>"><%= b.book %></a></li>
+            <% } %>
+        </ul>
+        <a href='/create'>Add book</a>
+		<p><a href='/logout'>Logout</a></p>
+    </body>
+</html>

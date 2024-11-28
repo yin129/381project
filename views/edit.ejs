@@ -1,0 +1,12 @@
+<html>
+    <body>
+		<H1>Welcome to Bookshelf</H1>
+		<hr/>
+        <form action="/update" method="POST" enctype="multipart/form-data">
+            Book Name: <input name="bookingid" value=<%= booking.book %>><br>
+            Book ID: <input name="mobile" value=<%= booking.id %> ><br>
+            <input type="hidden" name="_id" value=<%= booking._id %>>
+            <input type="submit" value="update">  
+        </form>
+    </body>
+</html>

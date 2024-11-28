@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 1.5em;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #weather {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form id="login-form" onsubmit="return handleLogin(event)">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        
+        <div id="weather">
+            <h2>Current Weather</h2>
+            <div id="weather-info">Loading...</div>
+        </div>
+    </div>
+
+    <script>
+        async function getWeather() {
+            const apiKey = 'f3d8fa6b5fda7737662619517118ec2e'; 
+            const city = 'Beijing'; 
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Weather data not available');
+                }
+                const data = await response.json();
+                const temperature = data.main.temp;
+                const weatherDescription = data.weather[0].description;
+                document.getElementById('weather-info').innerText = 
+                    `Temperature: ${temperature}°C, Condition: ${weatherDescription}`;
+            } catch (error) {
+                document.getElementById('weather-info').innerText = error.message;
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = event.target.username.value;
+            const password = event.target.password.value;
+
+            if (username === 'Testacc' && password === '123') {
+                window.location.href = '/auth/facebook';
+            } else {
+                alert('Invalid username or password');
+            }
+        }
+
+        window.onload = getWeather;
+    </script>
+</body>
+</html>
